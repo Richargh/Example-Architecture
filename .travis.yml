@@ -1,1 +1,5 @@
 language: java
+
+before_install:
+# We need GraphViz to draw architecture diagrams
+ - "sudo apt-get install graphviz"
