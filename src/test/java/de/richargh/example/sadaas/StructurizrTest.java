@@ -7,13 +7,13 @@ import org.testng.annotations.*;
 import static org.mockito.Mockito.*;
 
 @Test
-public class StructurizrTest{
+public class StructurizrTest {
 
     @Test
-    public class Reflection{
+    public class RelevantClassesAreFoundViaReflection{
 
         @Test
-        public void shouldFindAllComponentsInClasspath() throws Exception {
+        public void findAtLeastAllComponentsInClasspath() throws Exception {
             final int componentCount = 3;
             final String namespace = "de.richargh.example.sadaas";
             Container tmp = generateContainer();
@@ -27,18 +27,27 @@ public class StructurizrTest{
         }
     }
 
+    @Test
+    public class AComponentDiagram{
+
+        @Test
+        public void doesNotCrash() throws Exception {
+            StructurizrSimple.main(new String[0]);
+        }
+    }
+
     private static Container generateContainer(){
         Workspace workspace = new Workspace(
-                "Spring PetClinic",
-                "This is a C4 representation of the Spring PetClinic sample app (https://github.com/spring-projects/spring-petclinic/)");
+                "Project name",
+                "This is test project");
         Model model = workspace.getModel();
         SoftwareSystem springPetClinic = model.addSoftwareSystem(
-                "Spring PetClinic",
-                "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.");
+                "System name",
+                "description");
         Container webApplication = springPetClinic.addContainer(
                 "Web Application",
-                "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.",
-                "Java and Spring");
+                "Allows people to....",
+                "Java");
         return webApplication;
     }
 

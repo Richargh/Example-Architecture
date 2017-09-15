@@ -18,6 +18,10 @@ public class StructurizrSimple {
     public static final String COMPONENT_VIEW = "ComponentView";
     public static final String JVM2_COMPONENT_VIEW = "JVM2ComponentView";
 
+    public static void foo(){
+
+    }
+
     public static void main(String[] args) throws Exception {
         Workspace workspace = getSoftwareSystem();
 
