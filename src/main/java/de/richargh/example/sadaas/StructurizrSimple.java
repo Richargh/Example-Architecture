@@ -1,6 +1,6 @@
 package de.richargh.example.sadaas;
 
-import java.io.StringWriter;
+import java.io.*;
 import java.util.Set;
 import com.structurizr.*;
 import com.structurizr.analysis.*;
@@ -8,8 +8,11 @@ import com.structurizr.io.*;
 import com.structurizr.io.plantuml.PlantUMLWriter;
 import com.structurizr.model.*;
 import com.structurizr.view.*;
+import net.sourceforge.plantuml.SourceStringReader;
 
 public class StructurizrSimple {
+
+    private final static String namespace = "de.richargh.example.sadaas";
 
     public static final String PAYMENT_TERMINAL = "Payment Terminal";
     public static final String FRAUD_DETECTOR = "Fraud Detector";
@@ -30,9 +33,12 @@ public class StructurizrSimple {
         addSpringComponents(workspace);
         // exportToPlantUml(workspace.getViews().getViewWithKey(SOFTWARE_SYSTEM_VIEW));
         // exportToPlantUml(workspace.getViews().getViewWithKey(CONTAINER_VIEW));
-        exportToPlantUml(workspace.getViews().getViewWithKey(COMPONENT_VIEW));
 
-        exportToPlantUml(workspace.getViews().getViewWithKey(JVM2_COMPONENT_VIEW));
+        System.out.println(toPlantUml(workspace.getViews().getViewWithKey(COMPONENT_VIEW)));
+        exportImageFile(workspace.getViews().getViewWithKey(COMPONENT_VIEW), "doc/architecture/components.png");
+        exportImageFile(workspace.getViews().getViewWithKey(JVM2_COMPONENT_VIEW), "doc/architecture/springComponents.png");
+
+        System.out.println(toPlantUml(workspace.getViews().getViewWithKey(JVM2_COMPONENT_VIEW)));
 
         addStyles(workspace.getViews());
         //uploadToExternal(workspace);
@@ -44,11 +50,9 @@ public class StructurizrSimple {
 
         ComponentView view = workspace.getViews().createComponentView(jvm2, JVM2_COMPONENT_VIEW, "JVM2ComponentView");
         view.addAllComponents();
-
     }
 
     private static void findComponents(Container jvm) throws Exception {
-        final String namespace = "de.richargh.example.sadaas";
         ComponentFinder componentFinder = new ComponentFinder(
                 jvm,
                 namespace,
@@ -100,11 +104,25 @@ public class StructurizrSimple {
         view.addAllContainers();
     }
 
-    private static void exportToPlantUml(View view) throws WorkspaceWriterException {
+    private static String toPlantUml(View view) throws WorkspaceWriterException {
         StringWriter stringWriter = new StringWriter();
         PlantUMLWriter plantUMLWriter = new PlantUMLWriter();
         plantUMLWriter.write(view, stringWriter);
-        System.out.println(stringWriter.toString());
+        return stringWriter.toString();
+    }
+
+    private static void exportImageFile(View view, String fileName) throws IOException, WorkspaceWriterException {
+        System.out.println("Saving Diagram as Image");
+        SourceStringReader reader = new SourceStringReader(toPlantUml(view));
+        File file = new File(fileName);
+        new File(file.getParent()).mkdir();
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        try (OutputStream png = new FileOutputStream(file)) {
+            String desc = reader.generateImage(png);
+            System.out.println(desc);
+        }
     }
 
     private static Workspace getSoftwareSystem() {
