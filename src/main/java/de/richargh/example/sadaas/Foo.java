@@ -58,7 +58,8 @@ class Foo {
         SystemContextView contextView = views.createSystemContextView(softwareSystem, "SystemContext",
                 "An example of a System Context diagram");
 
-        ComponentFinder componentFinder = new ComponentFinder(webApplication, "de.db",
+        final String namespace = "de.richargh.example.sadaas";
+        ComponentFinder componentFinder = new ComponentFinder(webApplication, namespace,
                 new TypeMatcherComponentFinderStrategy(
                         new NameSuffixTypeMatcher("Controller", "Controller description", "Controller technology"),
                         new NameSuffixTypeMatcher("Repository", "Repository description", "Repository technology")),

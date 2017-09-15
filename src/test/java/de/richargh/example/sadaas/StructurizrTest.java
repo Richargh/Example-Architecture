@@ -15,10 +15,11 @@ public class StructurizrTest{
         @Test
         public void shouldFindAllComponentsInClasspath() throws Exception {
             final int componentCount = 3;
+            final String namespace = "de.richargh.example.sadaas";
             Container tmp = generateContainer();
             AbstractTypeMatcher test = mock(AbstractTypeMatcher.class);
             ComponentFinder componentFinder = new ComponentFinder(
-                    tmp, "de.db", new TypeMatcherComponentFinderStrategy(test));
+                    tmp, namespace, new TypeMatcherComponentFinderStrategy(test));
 
             componentFinder.findComponents().size();
 

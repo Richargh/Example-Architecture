@@ -44,9 +44,10 @@ public class StructurizrSimple {
     }
 
     private static void findComponents(Container jvm) throws Exception {
+        final String namespace = "de.richargh.example.sadaas";
         ComponentFinder componentFinder = new ComponentFinder(
                 jvm,
-                "de.db.snslyxe",
+                namespace,
                 new SpringComponentFinderStrategy(
                         new ReferencedTypesSupportingTypesStrategy()
                 ),
