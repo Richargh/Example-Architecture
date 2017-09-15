@@ -1,5 +1,7 @@
 # Example-Architecture
 
+[![Build Status](https://travis-ci.org/Richargh/Example-ArchitectureValidation.svg?branch=master)](https://travis-ci.org/Richargh/Example-ArchitectureValidation)
+
 An example for how to generate and validate achitecture with structurizr and jdepend.
 
 ## Run
