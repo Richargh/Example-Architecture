@@ -1,0 +1,12 @@
+@startuml
+title Spring PetClinic - Web Application - Components
+actor "Clinic Employee" <<Person>> as 5
+component "Software System" <<Software System>> as 2
+actor "User" <<Person>> as 1
+package WebApplication {
+  component "Home Page Controller" <<manually added controller>> as 7
+}
+1 ..> 2 : Uses
+@enduml
+
+

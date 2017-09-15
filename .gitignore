@@ -1,0 +1,25 @@
+# Compiled class file
+*.class
+.classpath
+target/
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# VS Code
+.project
+
+# Eclipse
+.settings/
+
+#IntelliJ
+.idea/
+*.iml
